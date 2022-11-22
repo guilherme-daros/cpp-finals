@@ -9,20 +9,20 @@
 #include <string>
 
 class Serial {
-   public:
-    Serial(std::string paramPathSerial, int paramBaudrate);
-    ~Serial();
+ public:
+  Serial(std::string paramPathSerial, int paramBaudrate);
+  ~Serial();
 
-    int openPort();
-    int writePort(std::string o_str);
-    int readPort(std::string i_str);
-    int sendPort(std::string testString);
-    int closePort();
+  int openPort();
+  int writePort(std::string o_str);
+  int readPort(std::string i_str);
+  int sendPort(std::string testString);
+  int closePort();
 
-   private:
-    std::string pathSerial;
-    int baudrate;
+ private:
+  std::string pathSerial;
+  int baudrate;
 
-    // filedescriptors
-    int fd;
+  // filedescriptors
+  int fd;
 };
