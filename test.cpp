@@ -5,7 +5,7 @@
 #include "Serial.hpp"
 
 int main() {
-  Serial serial("/dev/ttyUSB0", 9600);
+  Serial serial("/dev/ttyUSB0", B9600);
 
   std::cout << "[Serial] Connecting\n";
   while (serial.openPort() < 0) {
@@ -13,10 +13,11 @@ int main() {
   std::cout << "[Serial] Connected\n";
 
   using namespace std::chrono_literals;
-  std::this_thread::sleep_for(120s);
+  std::this_thread::sleep_for(5s);
 
-  std::string str;
-  serial.readPort(str);
+  std::cout << serial.readPort();
+  std::cout << serial.readPort();
+  std::cout << serial.readPort();
 
   std::cout << "[Serial] Disconnecting\n";
   if (serial.closePort() < 0) {

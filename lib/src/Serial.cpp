@@ -25,23 +25,20 @@ int Serial::openPort() {
     return -1;
   }
 
-  // safe old parameters
-  serial_old = serial;
   // SERIAL CONFIGURATION
   /* Set Baud Rate */
-  cfsetospeed(&serial, (speed_t)baudrate);
-  cfsetispeed(&serial, (speed_t)baudrate);
+  cfsetospeed(&serial, baudrate);
+  cfsetispeed(&serial, baudrate);
 
-  //     Setting other Port Stuff
   serial.c_cflag &= ~PARENB;  // Make 8n1
   serial.c_cflag &= ~CSTOPB;
   serial.c_cflag &= ~CSIZE;
   serial.c_cflag |= CS8;
 
-  serial.c_cflag &= ~CRTSCTS;        // no flow control
-  serial.c_cc[VMIN] = 1;             // read doesn't block
-  serial.c_cc[VTIME] = 5;            // 0.5 seconds read timeout
-  serial.c_cflag |= CREAD | CLOCAL;  // turn on READ & ignore ctrl lines
+  serial.c_cflag &= ~CRTSCTS;
+  serial.c_cc[VMIN] = 1;
+  serial.c_cc[VTIME] = 5;
+  serial.c_cflag |= CREAD | CLOCAL;
 
   /* Make raw */
   cfmakeraw(&serial);
@@ -64,14 +61,25 @@ int Serial::writePort(std::string o_str) {
   }
   return 1;
 };
-int Serial::readPort(std::string i_str) {
+
+std::string Serial::readPort() {
   int bytes;
+  std::string i_str;
+
   ioctl(fd, FIONREAD, &bytes);
-  std::cout << bytes;
-  return 1;
+
+  if (bytes > 0) {
+    char c;
+    while (c != '\n') {
+      read(fd, &c, 1);
+      i_str += c;
+    }
+  }
+  return i_str;
 };
 
 int Serial::closePort() {
+  tcflush(fd, TCIOFLUSH);
   close(fd);
   return 1;
 }

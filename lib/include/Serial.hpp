@@ -15,8 +15,9 @@ class Serial {
 
   int openPort();
   int writePort(std::string o_str);
-  int readPort(std::string i_str);
-  int sendPort(std::string testString);
+
+  std::string readPort();
+
   int closePort();
 
  private:
