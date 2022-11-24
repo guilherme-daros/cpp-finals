@@ -80,6 +80,5 @@ std::string Serial::readPort() {
 
 int Serial::closePort() {
   tcflush(fd, TCIOFLUSH);
-  close(fd);
   return 1;
 }
