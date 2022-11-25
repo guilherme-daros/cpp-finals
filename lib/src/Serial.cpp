@@ -70,6 +70,10 @@ std::string Serial::readPort() {
 
   if (bytes > 0) {
     char c;
+    while (c != '$') {
+      read(fd, &c, 1);
+    }
+
     while (c != '\n') {
       read(fd, &c, 1);
       i_str += c;
