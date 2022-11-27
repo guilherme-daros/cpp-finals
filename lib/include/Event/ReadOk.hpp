@@ -1,24 +1,37 @@
 #pragma once
-
-#include <ctime>
-
 #include "EventBase.hpp"
 
 class ReadOk : public EventBase {
- protected:
-  uint32_t measuredValue;
+   protected:
+    uint32_t measuredValue;
 
- public:
-  ReadOk() {
-    measuredValue = 0;
-    std::time(&timepoint);
-  };
-  void print(std::ostream& str) override {
-    char buf[100];
-    strftime(buf, 100, "%d %b %Y %T", localtime(&timepoint));
+   public:
+    ReadOk() {
+        measuredValue = 0;
+        std::time(&timepoint);
+    }
 
-    str << buf;
-    str << " - [ReadOk]";
-    str << " measuredValue: " << measuredValue << ";";
-  }
+    ReadOk(uint32_t measuredValue_p) {
+        measuredValue = measuredValue_p;
+        std::time(&timepoint);
+    }
+
+    ReadOk(json j) {
+        timepoint = j["timepoint"];
+        measuredValue = j["measuredValue"];
+    }
+
+    json toJson() override {
+        return {
+            {"eventName", "ReadOk"}, {"timepoint", timepoint}, {"measuredValue", measuredValue}};
+    }
+
+    void print(std::ostream& str) override {
+        char buf[100];
+        strftime(buf, 100, "%d %b %Y %T", localtime(&timepoint));
+
+        str << buf;
+        str << " - [ReadOk] - ";
+        str << "measuredValue: " << measuredValue << ";";
+    }
 };
