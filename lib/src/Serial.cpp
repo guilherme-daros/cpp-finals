@@ -62,6 +62,14 @@ int Serial::writePort(std::string o_str) {
   return 1;
 };
 
+bool Serial::available(){
+  int bytes;
+  ioctl(fd, FIONREAD, &bytes);
+
+  if (bytes > 0) return true;
+  else return false;
+}
+
 std::string Serial::readPort() {
   int bytes;
   std::string i_str;

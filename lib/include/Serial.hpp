@@ -18,6 +18,8 @@ class Serial {
 
   std::string readPort();
 
+  bool available();
+
   int closePort();
 
  private:
