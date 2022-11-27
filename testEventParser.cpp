@@ -44,7 +44,8 @@ int main(int argc, char const *argv[])
     
     std::vector<EventBase *> queue;
     for (auto i: str_queue){
-        queue.emplace_back(ParseEvent(i));
+            std::cout << i << std::endl;
+	    queue.emplace_back(ParseEvent(i));
     } 
     for (auto i: queue){
         std::cout << *i << std::endl;
