@@ -1,48 +1,21 @@
-#include <chrono>
 #include <iostream>
-#include <thread>
-#include <vector>
+#include <string>
 
-#include "AppMenu.hpp"
-#include "Event/Init.hpp"
-#include "Event/NewModelArrived.hpp"
-#include "Event/PredictFail.hpp"
-#include "Event/PredictOk.hpp"
-#include "Event/ReadFail.hpp"
-#include "Event/ReadOk.hpp"
-#include "Event/SendDataToServer.hpp"
-#include "Event/Sleep.hpp"
-#include "Event/WakeUp.hpp"
+#include "Event/Event.hpp"
 
 int main(int argc, char const *argv[]) {
-  using namespace std::chrono_literals;
+    PredictFail i{1, 2};
 
-  std::vector<EventBase *> queue;
+    json j = i.toJson();
 
-  queue.emplace_back(new Init);
-  queue.emplace_back(new ReadOk);
-  queue.emplace_back(new PredictOk);
-  queue.emplace_back(new Sleep);
-  queue.emplace_back(new WakeUp);
-  queue.emplace_back(new ReadOk);
-  queue.emplace_back(new PredictFail);
-  queue.emplace_back(new SendDataToServer);
-  queue.emplace_back(new NewModelArrived);
-  queue.emplace_back(new Sleep);
-  queue.emplace_back(new WakeUp);
-  queue.emplace_back(new ReadFail);
-  queue.emplace_back(new ReadOk);
-  queue.emplace_back(new PredictOk);
-  queue.emplace_back(new Sleep);
+    std::string a = j.dump();
 
-  const time_t initialTime{AppMenu::getTimeFromUserMenu("Initial Time")};
+    json b = json::parse(a);
 
-  const time_t endTime{AppMenu::getTimeFromUserMenu("End Time")};
+    std::cout << i << std::endl;
+    std::cout << j << std::endl;
+    std::cout << a << std::endl;
+    std::cout << b << std::endl;
 
-  int option = AppMenu::getEventTypeMenu();
-
-  std::vector<EventBase *> slice =
-      AppMenu::getTimedSliceMenu(queue, initialTime, endTime);
-
-  AppMenu::printQueueSlice(slice);
+    return 0;
 }
