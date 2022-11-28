@@ -22,7 +22,7 @@ int main() {
 
     while(serial.available()){
         std::string A = serial.readPort();
-        queue.emplace_back(ParseEvent(A));
+        queue.emplace_back(EventParser::ParseEvent(A));
     }
 
     for (auto i: queue){
