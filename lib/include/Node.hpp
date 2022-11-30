@@ -2,12 +2,12 @@
 
 template <class T>
 class Node {
-   public:
-    T data;
-    Node<T> *next;
+ public:
+  T data;
+  Node<T>* next;
 
-    Node(T data) {
-        this->data = data;
-        next = 0;
-    }
+  Node(T data) {
+    this->data = data;
+    next = 0;
+  }
 };

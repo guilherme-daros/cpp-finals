@@ -3,12 +3,12 @@
 #include "Event/Event.hpp"
 #include "Queue2.hpp"
 
-int main(int argc, char const *argv[]) {
-    Queue<EventBase *> queue;
+int main(int argc, char const* argv[]) {
+  Queue<EventBase*> queue;
 
-    queue.push(new PredictFail(12, 13));
+  queue.push(new PredictFail(12, 13));
 
-    std::cout << *queue.pop() << std::endl;
+  std::cout << *queue.pop() << std::endl;
 
-    return 0;
+  return 0;
 }

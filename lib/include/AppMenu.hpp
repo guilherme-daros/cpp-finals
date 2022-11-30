@@ -44,7 +44,7 @@ std::time_t getTimeFromUserMenu(std::string const prompt) {
   uint16_t h, m, s;
 
   std::time_t rawtime;
-  struct std::tm *timeinfo;
+  struct std::tm* timeinfo;
 
   std::time(&rawtime);
   timeinfo = std::localtime(&rawtime);
@@ -66,10 +66,11 @@ std::time_t getTimeFromUserMenu(std::string const prompt) {
   return std::mktime(timeinfo);
 }
 
-std::vector<EventBase *> getTimedSliceMenu(
-    std::vector<EventBase *> vector_to_slice, time_t beginTime,
+std::vector<EventBase*> getTimedSliceMenu(
+    std::vector<EventBase*> vector_to_slice,
+    time_t beginTime,
     time_t endTime) {
-  EventBase *SliceBegin;
+  EventBase* SliceBegin;
   for (auto i{0}; i < vector_to_slice.size(); i++) {
     if (vector_to_slice[i]->getTime() > beginTime) {
       if (i == 0)
@@ -80,7 +81,7 @@ std::vector<EventBase *> getTimedSliceMenu(
     }
   }
 
-  EventBase *SliceEnd;
+  EventBase* SliceEnd;
   for (auto i{0}; i < vector_to_slice.size(); i++) {
     if (i == vector_to_slice.size() - 1) {
       SliceEnd = vector_to_slice[i];
@@ -90,7 +91,7 @@ std::vector<EventBase *> getTimedSliceMenu(
       break;
     }
   }
-  std::vector<EventBase *> slice;
+  std::vector<EventBase*> slice;
   bool inSlice{false};
   for (auto i : vector_to_slice) {
     if (i == SliceBegin) {
@@ -107,7 +108,7 @@ std::vector<EventBase *> getTimedSliceMenu(
   return slice;
 };
 
-void printQueueSlice(std::vector<EventBase *> &slice) {
+void printQueueSlice(std::vector<EventBase*>& slice) {
   std::cout << "\n====================Found Data====================\n";
   for (auto i : slice) {
     std::cout << *i << "\n";
