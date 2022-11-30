@@ -13,6 +13,8 @@ add_executable(TestSerial testSerial.cpp lib/src/Serial.cpp)
 
 add_executable(TestQueue testQueue.cpp)
 
+add_executable(TestQueue2 testQueue2.cpp lib/src/Queue.cpp)
+
 add_executable(TestEventParser testEventParser.cpp)
 
 add_executable(MeterStationHost "${PROJECT_SOURCE_DIR}/apps/computer/main.cpp" lib/src/Serial.cpp)
@@ -20,8 +22,14 @@ add_executable(MeterStationHost "${PROJECT_SOURCE_DIR}/apps/computer/main.cpp" l
 target_include_directories(TestSerial   PUBLIC "${PROJECT_SOURCE_DIR}"
                                         "${PROJECT_SOURCE_DIR}/lib/include"
                                         )
+
 target_include_directories(TestQueue    PUBLIC "${PROJECT_SOURCE_DIR}"
                                         "${PROJECT_SOURCE_DIR}/lib/include"
+                                        )
+
+target_include_directories(TestQueue2   PUBLIC "${PROJECT_SOURCE_DIR}"
+                                        "${PROJECT_SOURCE_DIR}/lib/include"
+                                        "${PROJECT_SOURCE_DIR}/lib/src"
                                         )
                                         
 target_include_directories(TestEventParser  PUBLIC "${PROJECT_SOURCE_DIR}"
