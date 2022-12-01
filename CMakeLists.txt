@@ -9,13 +9,17 @@ project(${PROJECTNAME} VERSION 1.0)
 set(CMAKE_CXX_STANDARD 20)
 set(CXX_STANDARD_REQUIRED True)
 
+set(CMAKE_BUILD_TYPE Debug)
+
 add_executable(TestSerial testSerial.cpp lib/src/Serial.cpp)       
 
 add_executable(TestQueue testQueue.cpp)
 
-add_executable(TestQueue2 testQueue2.cpp lib/src/Queue.cpp)
+add_executable(TestQueue2 testQueue2.cpp)
 
 add_executable(TestEventParser testEventParser.cpp)
+
+add_executable(TestGetTime testGetTime.cpp)
 
 add_executable(MeterStationHost "${PROJECT_SOURCE_DIR}/apps/computer/main.cpp" lib/src/Serial.cpp)
 
@@ -35,6 +39,10 @@ target_include_directories(TestQueue2   PUBLIC "${PROJECT_SOURCE_DIR}"
 target_include_directories(TestEventParser  PUBLIC "${PROJECT_SOURCE_DIR}"
                                             "${PROJECT_SOURCE_DIR}/lib/include"
                                             )
+
+target_include_directories(TestGetTime  PUBLIC "${PROJECT_SOURCE_DIR}"
+                                        "${PROJECT_SOURCE_DIR}/lib/include"
+                                        )
 
 target_include_directories(MeterStationHost PUBLIC "${PROJECT_SOURCE_DIR}"
                                         "${PROJECT_SOURCE_DIR}/lib/include"

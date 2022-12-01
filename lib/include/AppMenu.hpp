@@ -66,6 +66,29 @@ std::time_t getTimeFromUserMenu(std::string const prompt) {
   return std::mktime(timeinfo);
 }
 
+std::time_t getTimeFromCodeMenu(uint16_t d,
+                                uint16_t mo,
+                                uint16_t y,
+                                uint16_t h,
+                                uint16_t m,
+                                uint16_t s) {
+  std::time_t rawtime;
+  struct std::tm* timeinfo;
+  std::time(&rawtime);
+  timeinfo = std::localtime(&rawtime);
+
+  timeinfo->tm_mday = d;
+  timeinfo->tm_mon = mo - 1;
+  timeinfo->tm_year = y - 1900;
+  timeinfo->tm_hour = h;
+  timeinfo->tm_min = m;
+  timeinfo->tm_sec = s;
+
+  std::cout << std::flush;
+
+  return std::mktime(timeinfo);
+}
+
 std::vector<EventBase*> getTimedSliceMenu(
     std::vector<EventBase*> vector_to_slice,
     time_t beginTime,
@@ -87,21 +110,25 @@ std::vector<EventBase*> getTimedSliceMenu(
       SliceEnd = vector_to_slice[i];
       break;
     } else if (vector_to_slice[i]->getTime() > endTime) {
-      SliceEnd = vector_to_slice[i - 1];
+      if (i == 0)
+        SliceEnd = vector_to_slice[i];
+      else
+        SliceEnd = vector_to_slice[i - 1];
       break;
     }
   }
+
   std::vector<EventBase*> slice;
   bool inSlice{false};
   for (auto i : vector_to_slice) {
     if (i == SliceBegin) {
       inSlice = true;
     }
-    if (inSlice) {
-      slice.emplace_back(i);
-    }
     if (i == SliceEnd) {
       inSlice = false;
+    }
+    if (inSlice) {
+      slice.emplace_back(i);
     }
   }
 
