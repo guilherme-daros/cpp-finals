@@ -6,7 +6,9 @@ Serial::Serial(std::string PathSerial, int Baudrate) {
   baudrate = Baudrate;
 }
 
-Serial::~Serial() {}
+Serial::~Serial() {
+  closePort();
+}
 
 int Serial::openPort() {
   fd = open(pathSerial.c_str(), O_RDWR | O_NOCTTY | O_NDELAY);
@@ -54,18 +56,13 @@ int Serial::openPort() {
   return 1;
 }
 
-int Serial::writePort(std::string o_str) {
-  // attempt to send
-  if (write(fd, &o_str, std::strlen(o_str.c_str())) == -1) {
-    return -1;
-  }
-  return 1;
+int Serial::writePort(const std::string o_str) {
+  return write(fd, &o_str, sizeof(o_str));
 };
 
 bool Serial::available() {
   int bytes;
   ioctl(fd, FIONREAD, &bytes);
-
   if (bytes > 0)
     return true;
   else
@@ -77,7 +74,6 @@ std::string Serial::readPort() {
   std::string i_str;
 
   ioctl(fd, FIONREAD, &bytes);
-
   if (bytes > 0) {
     char c;
     while (c != '$') {
@@ -89,6 +85,7 @@ std::string Serial::readPort() {
       i_str += c;
     }
   }
+  std::cout << i_str;
   return i_str;
 };
 
