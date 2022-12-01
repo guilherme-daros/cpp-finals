@@ -1,7 +1,7 @@
 #include <iostream>
 
 #include "Event/Event.hpp"
-#include "Queue2.hpp"
+#include "Queue.hpp"
 
 int main(int argc, char const* argv[]) {
   Queue<EventBase*> queue;

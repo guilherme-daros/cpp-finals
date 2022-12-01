@@ -1,34 +1,48 @@
 #include "Node.hpp"
 
-#pragma once
-
 template <class T>
 class Queue {
   Node<T>* head;
   Node<T>* tail;
+  int size;
 
  public:
-  int length;
   Queue() {
     head = 0;
     tail = 0;
-    length = 0;
+    size = 0;
   }
 
-  ~Queue() {
-    Node<T>* cursor = head;
-    while (head) {
-      cursor = cursor->next;
-      delete head;
-      head = cursor;
+  void push(T data) {
+    Node<T>* newnode = new Node<T>(data);
+    if (tail == 0) {
+      head = newnode;
+      tail = newnode;
+    } else {
+      tail->next = newnode;
+      tail = tail->next;
     }
-    head = 0;  // Officially empty
-    tail = 0;
-    length = 0;
+    size++;
   }
-  void push(T new_data);
-  T pop();
-  Node<T>* begin();
-  Node<T>* end();
-  bool isEmpty();
+
+  T pop() {
+    // Return 0 if queue is empty
+    if (head == 0) {
+      return 0;
+    }
+    Node<T>* help = head;
+    T ans = head->data;
+    head = head->next;
+    delete help;
+    size--;
+    if (size == 0) {
+      head == 0;
+      tail = 0;
+    }
+    return ans;
+  }
+
+  int getSize() { return size; }
+
+  bool isEmpty() { return size == 0; }
 };
