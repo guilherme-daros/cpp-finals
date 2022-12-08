@@ -1,10 +1,11 @@
 #pragma once
+#include <cstdlib>
 #include "EventBase.hpp"
 
 class PredictOk : public EventBase {
  protected:
-  uint32_t predictedValue;
-  uint32_t actualValue;
+  int32_t predictedValue;
+  int32_t actualValue;
   uint32_t error;
 
  public:
