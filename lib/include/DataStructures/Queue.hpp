@@ -1,3 +1,4 @@
+#pragma once
 #include "Node.hpp"
 
 template <class T>
@@ -26,14 +27,13 @@ class Queue {
   }
 
   T pop() {
-    // Return 0 if queue is empty
-    if (head == 0) {
+    if (size == 0) {
       return 0;
     }
-    Node<T>* help = head;
+    Node<T>* temp = head;
     T ans = head->data;
     head = head->next;
-    delete help;
+    delete temp;
     size--;
     if (size == 0) {
       head == 0;

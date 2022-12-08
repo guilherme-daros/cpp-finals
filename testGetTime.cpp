@@ -4,9 +4,9 @@
 #include <vector>
 
 #include "AppMenu.hpp"
+#include "DataStructures/Queue.hpp"
 #include "Event/Event.hpp"
 #include "EventParser.hpp"
-#include "Queue.hpp"
 #include "Serial.hpp"
 
 int main() {

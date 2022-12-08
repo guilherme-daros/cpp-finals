@@ -4,9 +4,9 @@
 #include <vector>
 
 #include "AppMenu.hpp"
+#include "DataStructures/Queue.hpp"
 #include "Event/Event.hpp"
 #include "EventParser.hpp"
-#include "Queue.hpp"
 #include "Serial.hpp"
 
 int main() {
@@ -50,11 +50,11 @@ int main() {
 
     AppMenu::printQueueSlice(slice);
 
-    int exit_ = 0;
+    char exit_ = 0;
     std::cout << "[Host] - Press 0 to exit or other key to search again\n";
     std::cin >> exit_;
-    if (exit_ == 0) {
-      exit(0);
+    if (exit_ == '0') {
+      break;
     }
   }
   return 0;
