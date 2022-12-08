@@ -85,7 +85,6 @@ std::string Serial::readPort() {
       i_str += c;
     }
   }
-  std::cout << i_str;
   return i_str;
 };
 

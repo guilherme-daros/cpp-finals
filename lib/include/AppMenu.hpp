@@ -136,7 +136,9 @@ std::vector<EventBase*> getTimedSliceMenu(
 };
 
 void printQueueSlice(std::vector<EventBase*>& slice) {
-  std::cout << "\n====================Found Data====================\n";
+  std::cout << "\n====================Found Data====================";
+  std::cout << "\n====================" << slice.size()
+            << " Entries====================\n";
   for (auto i : slice) {
     std::cout << *i << "\n";
   }
