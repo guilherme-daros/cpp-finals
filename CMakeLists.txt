@@ -21,6 +21,8 @@ add_executable(TestEventParser testEventParser.cpp)
 
 add_executable(TestGetTime testGetTime.cpp)
 
+add_executable(TestList testList.cpp)
+
 add_executable(MeterStationHost "${PROJECT_SOURCE_DIR}/apps/computer/main.cpp" lib/src/Serial.cpp)
 
 target_include_directories(TestSerial   PUBLIC "${PROJECT_SOURCE_DIR}"
@@ -41,6 +43,10 @@ target_include_directories(TestEventParser  PUBLIC "${PROJECT_SOURCE_DIR}"
                                             )
 
 target_include_directories(TestGetTime  PUBLIC "${PROJECT_SOURCE_DIR}"
+                                        "${PROJECT_SOURCE_DIR}/lib/include"
+                                        )
+
+target_include_directories(TestList  PUBLIC "${PROJECT_SOURCE_DIR}"
                                         "${PROJECT_SOURCE_DIR}/lib/include"
                                         )
 
