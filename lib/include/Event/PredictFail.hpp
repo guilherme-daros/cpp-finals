@@ -3,8 +3,8 @@
 
 class PredictFail final : public EventBase {
  protected:
-  uint32_t predictedValue;
-  uint32_t actualValue;
+  float predictedValue;
+  float actualValue;
 
  public:
   PredictFail() {
@@ -13,7 +13,7 @@ class PredictFail final : public EventBase {
     std::time(&timepoint);
   }
 
-  PredictFail(uint32_t predictedValue_p, uint32_t actualValue_p) {
+  PredictFail(float predictedValue_p, float actualValue_p) {
     predictedValue = predictedValue_p;
     actualValue = actualValue_p;
     std::time(&timepoint);

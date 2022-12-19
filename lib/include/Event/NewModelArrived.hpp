@@ -4,6 +4,7 @@
 class NewModelArrived : public EventBase {
  protected:
   std::string modelName;
+  uint32_t seed;
 
  public:
   NewModelArrived() {
@@ -11,7 +12,7 @@ class NewModelArrived : public EventBase {
     std::time(&timepoint);
   }
 
-  NewModelArrived(std::string& modelName_p) {
+  NewModelArrived(std::string modelName_p) {
     modelName = modelName_p;
     std::time(&timepoint);
   }
@@ -19,12 +20,14 @@ class NewModelArrived : public EventBase {
   NewModelArrived(json j) {
     modelName = j["modelName"];
     timepoint = j["timepoint"];
+    seed = j["seed"];
   }
 
   json toJson() override {
     return {{"eventName", "NewModelArrived"},
             {"timepoint", timepoint},
-            {"modelName", modelName}};
+            {"modelName", modelName},
+            {"seed", seed}};
   }
 
   void print(std::ostream& str) override {
@@ -33,6 +36,7 @@ class NewModelArrived : public EventBase {
 
     str << buf;
     str << " - [NewModelArrived] - ";
-    str << "modelName: " << modelName << ";";
+    str << "modelName: " << modelName;
+    str << "seed" << seed;
   }
 };

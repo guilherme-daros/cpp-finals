@@ -3,7 +3,7 @@
 
 class ReadOk : public EventBase {
  protected:
-  uint32_t measuredValue;
+  float measuredValue;
 
  public:
   ReadOk() {
@@ -11,7 +11,7 @@ class ReadOk : public EventBase {
     std::time(&timepoint);
   }
 
-  ReadOk(uint32_t measuredValue_p) {
+  ReadOk(float measuredValue_p) {
     measuredValue = measuredValue_p;
     std::time(&timepoint);
   }

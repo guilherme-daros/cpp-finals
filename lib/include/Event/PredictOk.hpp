@@ -4,9 +4,9 @@
 
 class PredictOk : public EventBase {
  protected:
-  int32_t predictedValue;
-  int32_t actualValue;
-  uint32_t error;
+  float predictedValue;
+  float actualValue;
+  float error;
 
  public:
   PredictOk() {
@@ -16,7 +16,7 @@ class PredictOk : public EventBase {
     std::time(&timepoint);
   }
 
-  PredictOk(uint32_t predictedValue_p, uint32_t actualValue_p) {
+  PredictOk(float predictedValue_p, float actualValue_p) {
     predictedValue = predictedValue_p;
     actualValue = actualValue_p;
     error = abs(predictedValue - actualValue);

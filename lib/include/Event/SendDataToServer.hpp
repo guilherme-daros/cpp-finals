@@ -3,7 +3,7 @@
 
 class SendDataToServer : public EventBase {
  protected:
-  uint32_t actualValue;
+  float actualValue;
 
  public:
   SendDataToServer() {
@@ -11,7 +11,7 @@ class SendDataToServer : public EventBase {
     std::time(&timepoint);
   }
 
-  SendDataToServer(uint32_t actualValue_p) {
+  SendDataToServer(float actualValue_p) {
     actualValue = actualValue_p;
     std::time(&timepoint);
   }
